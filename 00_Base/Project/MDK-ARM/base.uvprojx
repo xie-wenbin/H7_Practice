@@ -533,6 +533,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\Source\bsp_timer.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\Source\bsp_uart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1335,6 +1340,11 @@
               <FileName>bsp_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\CM7\Source\bsp_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\Source\bsp_uart.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -53,6 +53,7 @@
 #include "bsp_timer.h"
 #include "bsp_led.h"
 #include "bsp_key.h"
+#include "bsp_uart.h"
 
 void bsp_Init(void);
 void Error_Handler(char *file, uint32_t line);

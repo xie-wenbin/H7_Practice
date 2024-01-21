@@ -20,17 +20,47 @@
 int main(void)
 {
     uint8_t ucKeyCode;
+    uint8_t read;
+    const char buf1[] = "received the serial command 1\r\n";
+    const char buf2[] = "received the serial command 2\r\n";
+    const char buf3[] = "received the serial command 3\r\n";
+    const char buf4[] = "received the serial command 4\r\n";
 
     bsp_Init();
 
-    bsp_StartAutoTimer(0, 100);
+    bsp_StartAutoTimer(0, 500);
 
     /* Infinite loop */
     while (1)
     {
         if (bsp_CheckTimer(0))
         {
-            //bsp_LedToggle(BSP_LED_BLUE);
+            bsp_LedToggle(BSP_LED_BLUE);
+        }
+
+        if (comGetChar(SERIAL_COM1, &read))
+        {
+            switch (read)
+            {
+                case '1':
+                    comSendBuf(SERIAL_COM1, (uint8_t *)buf1, strlen(buf1));
+                    break;
+
+                case '2':
+                    comSendBuf(SERIAL_COM1, (uint8_t *)buf2, strlen(buf2));
+                    break;
+
+                case '3':
+                    comSendBuf(SERIAL_COM1, (uint8_t *)buf3, strlen(buf3));
+                    break;
+
+                case '4':
+                    comSendBuf(SERIAL_COM1, (uint8_t *)buf4, strlen(buf4));
+                    break;	
+                
+                default:
+                    break;
+            }
         }
 
         ucKeyCode = bsp_GetKey();

@@ -75,6 +75,7 @@ void bsp_Init(void)
     bsp_InitKey();
     bsp_InitTimer();
     bsp_InitAllLed();
+    bsp_InitUart();
 
 }
 
