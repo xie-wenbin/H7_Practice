@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.md": "markdown",
+			"stm32h747i_discovery.h": "c",
+			"stm32h747i_discovery_conf.h": "c",
+			"bsp_led.h": "c",
+			"bsp_gpio.h": "c",
+			"stm32h7xx_hal.h": "c",
+			"bsp_timer.h": "c",
+			"bsp.h": "c"
+		},
+		"editor.tabSize": 4,
+		"editor.detectIndentation": true
+	}
+}
