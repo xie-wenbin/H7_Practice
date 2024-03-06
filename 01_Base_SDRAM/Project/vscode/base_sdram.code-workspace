@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.md": "markdown",
+			"stm32h747i_discovery.h": "c",
+			"stm32h747i_discovery_conf.h": "c",
+			"bsp_led.h": "c",
+			"bsp_gpio.h": "c",
+			"stm32h7xx_hal.h": "c",
+			"bsp_timer.h": "c",
+			"bsp.h": "c",
+			"main.h": "c",
+			"stm32h747i_discovery_sdram.h": "c",
+			"is42s32800j.h": "c",
+			"bsp_fmc_sdram.h": "c",
+			"is42s32800j_conf.h": "c",
+			"stm32h7xx_hal_conf.h": "c",
+			"stm32h7xx_hal_sdram.h": "c",
+			"stm32h7xx_ll_fmc.h": "c",
+			"stm32h747i_discovery_errno.h": "c",
+			"appl_sdram_test.h": "c",
+			"bsp_dwt.h": "c"
+		},
+		"editor.tabSize": 4,
+		"editor.detectIndentation": true
+	}
+}
