@@ -1,0 +1,82 @@
+/**
+  ******************************************************************************
+  * @file    UART/UART_WakeUpFromStopUsingFIFO/CM7/Inc/main.h
+  * @author  MCD Application Team
+  * @brief   Header for main.c module
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MAIN_H
+#define __MAIN_H
+
+/* Includes ------------------------------------------------------------------*/
+#include  <stdarg.h>
+#include  <stdio.h>
+#include  <stdlib.h>
+#include  <math.h>
+
+/*
+*********************************************************************************************************
+*                                           OS/System Lib
+*********************************************************************************************************
+*/
+#include "stm32h7xx_hal.h"
+#include "cmsis_os2.h"
+
+/*
+*********************************************************************************************************
+*                                        APP / BSP
+*********************************************************************************************************
+*/
+#include "bsp.h"
+
+
+/* Exported types ------------------------------------------------------------*/
+
+/* Exported constants --------------------------------------------------------*/
+/* User can use this section to tailor USARTx/UARTx instance used and associated
+   resources */
+#define USARTx                           USART1
+#define USARTx_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE()
+#define USARTx_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+
+#define RCC_PERIPHCLK_USARTx             RCC_PERIPHCLK_USART1
+#define RCC_USARTxCLKSOURCE_HSI          RCC_USART1CLKSOURCE_HSI
+
+#define USARTx_FORCE_RESET()             __HAL_RCC_USART1_FORCE_RESET()
+#define USARTx_RELEASE_RESET()           __HAL_RCC_USART1_RELEASE_RESET()
+
+#define USARTx_IRQn                      USART1_IRQn
+#define USARTx_IRQHandler                USART1_IRQHandler
+
+#define USARTx_TX_PIN                    GPIO_PIN_9
+#define USARTx_TX_GPIO_PORT              GPIOA
+#define USARTx_TX_AF                     GPIO_AF7_USART1
+#define USARTx_RX_PIN                    GPIO_PIN_10
+#define USARTx_RX_GPIO_PORT              GPIOA
+#define USARTx_RX_AF                     GPIO_AF7_USART1
+
+/* Exported macro ------------------------------------------------------------*/
+#define bsp_ProPer1ms  SysTick_ISR
+
+
+/* Exported variavles ------------------------------------------------------------*/
+extern uint8_t gucWukpKeyState;
+
+
+/* Exported functions --------------------------------------------------------*/
+
+#endif /* __MAIN_H */
+

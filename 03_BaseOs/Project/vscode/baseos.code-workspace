@@ -1,0 +1,50 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.md": "markdown",
+			"*.bin": "code-text-binary",
+			"stm32h747i_discovery.h": "c",
+			"stm32h747i_discovery_conf.h": "c",
+			"bsp_led.h": "c",
+			"bsp_gpio.h": "c",
+			"stm32h7xx_hal.h": "c",
+			"bsp_timer.h": "c",
+			"bsp.h": "c",
+			"main.h": "c",
+			"stm32h747i_discovery_sdram.h": "c",
+			"is42s32800j.h": "c",
+			"bsp_fmc_sdram.h": "c",
+			"is42s32800j_conf.h": "c",
+			"stm32h7xx_hal_conf.h": "c",
+			"stm32h7xx_hal_sdram.h": "c",
+			"stm32h7xx_ll_fmc.h": "c",
+			"stm32h747i_discovery_errno.h": "c",
+			"appl_sdram_test.h": "c",
+			"bsp_dwt.h": "c",
+			"stm32h747i_discovery_lcd.h": "c",
+			"lcd.h": "c",
+			"otm8009a.h": "c",
+			"bsp_ltdc_dsi.h": "c",
+			"bsp_lcd_dev.h": "c",
+			"bsp_uart.h": "c",
+			"bsp_lcd_svc.h": "c",
+			"bsp_lcd_hw.h": "c",
+			"appl_lcd_test.h": "c",
+			"bsp_lcd_utils.h": "c",
+			"bsp_lcd.h": "c",
+			"bsp_lcd_ts.h": "c",
+			"bsp_i2c.h": "c",
+			"ft6x06.h": "c",
+			"appgui.h": "c",
+			"stdarg.h": "c",
+			"stlogo.h": "c"
+		},
+		"editor.tabSize": 4,
+		"editor.detectIndentation": true
+	}
+}
