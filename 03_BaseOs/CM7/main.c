@@ -5,6 +5,7 @@
 
 /* Public variables ---------------------------------------------------------*/
 uint8_t gucWukpKeyState = 0xFF;
+uint8_t gucJoyUKeyState = 0xFF;
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -52,16 +53,27 @@ const osThreadAttr_t ThreadGUI_Attr =
     .stack_size = 2048,
 };
 
+const osThreadAttr_t ThreadPeriph_Attr =
+{
+    .name = "osThreadPeriph",
+    .attr_bits = osThreadDetached,
+    .priority = osPriorityNormal,
+    .stack_size = 4096,
+};
+
 /* 任务句柄 */
 osThreadId_t ThreadIdTaskGUI = NULL;
 osThreadId_t ThreadIdTaskUserIF = NULL;
 osThreadId_t ThreadIdTaskLED = NULL;
 osThreadId_t ThreadIdRoot = NULL;
 
+osThreadId_t ThreadIdPeriph = NULL;
+
 /* Private function prototypes -----------------------------------------------*/
 void AppTaskRoot(void *argument);
 void AppTaskUserIF(void *argument);
 void AppTaskLED(void *argument);
+void AppTaskPeripheral(void *argument);
 static void AppTaskCreate (void);
 static void PrintfLogo(void);
 
@@ -115,6 +127,31 @@ int main(void)
     while(1);
 }
 
+extern void appQspi_demo(void);
+/*
+*********************************************************************************************************
+*	函 数 名: AppTaskPeripheral
+*	功能说明: 外设测试任务
+*	形    参: 无
+*	返 回 值: 无
+*   优 先 级: osPriorityNormal  (数值越小优先级越低，这个跟uCOS相反) 
+*********************************************************************************************************
+*/
+void AppTaskPeripheral(void *argument)
+{
+    while (1)
+    {
+        if (1 == gucJoyUKeyState)
+        {
+            gucJoyUKeyState = 0;
+            appQspi_demo();
+        }
+        else if (2 == gucJoyUKeyState)
+        {
+        }
+        osDelay(5);
+    }
+}
 
 /*
 *********************************************************************************************************
@@ -171,7 +208,21 @@ void AppTaskUserIF(void *argument)
                     }
                     break;
                 case KEY_2_DOWN:  /*JOY U*/
-                    printf("K2 DOWM\r\n");
+                    {
+                        if (0 == gucJoyUKeyState)
+                        {
+                            gucJoyUKeyState = 1;
+                        }
+                        else if (1 == gucJoyUKeyState)
+                        {
+                            gucJoyUKeyState = 0;
+                        }
+                        else
+                        {
+                            gucJoyUKeyState = 0;
+                        }
+                        printf("K2 DOWM, gucWukpKeyState: %d\r\n", gucJoyUKeyState);
+                    }
                     break;
                 case KEY_3_DOWN: /*JOY D*/
                     printf("K3 DOWM\r\n");
@@ -268,7 +319,8 @@ static void AppTaskCreate (void)
 {
 	ThreadIdTaskLED = osThreadNew(AppTaskLED, NULL, &ThreadLED_Attr);  
 	ThreadIdTaskUserIF = osThreadNew(AppTaskUserIF, NULL, &ThreadUserIF_Attr);
-	ThreadIdTaskGUI = osThreadNew(AppTaskGUI, NULL, &ThreadGUI_Attr);      
+	ThreadIdTaskGUI = osThreadNew(AppTaskGUI, NULL, &ThreadGUI_Attr);
+    ThreadIdPeriph = osThreadNew(AppTaskPeripheral, NULL, &ThreadPeriph_Attr); 
 }
 
 

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx, USE_STM32H747I_DISCO,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\CM7\application_test</IncludePath>
+              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Components\mt25tl01g;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\CM7\application_test</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -548,6 +548,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appPicBinary.c</FilePath>
             </File>
+            <File>
+              <FileName>appQspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\appQspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -690,6 +695,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_uart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_qspi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\bsp\bsp_qspi_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -791,6 +801,11 @@
               <FileName>otm8009a_reg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -951,6 +966,11 @@
               <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1559,6 +1579,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appPicBinary.c</FilePath>
             </File>
+            <File>
+              <FileName>appQspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\appQspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1632,6 +1657,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_uart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_qspi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\bsp\bsp_qspi_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1664,6 +1694,11 @@
               <FileName>otm8009a_reg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\BSP\Components\otm8009a\otm8009a_reg.c</FilePath>
+            </File>
+            <File>
+              <FileName>mt25tl01g.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\BSP\Components\mt25tl01g\mt25tl01g.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1824,6 +1859,11 @@
               <FileName>stm32h7xx_hal_i2c_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
             </File>
           </Files>
         </Group>

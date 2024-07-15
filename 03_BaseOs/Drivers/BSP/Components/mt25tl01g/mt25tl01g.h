@@ -73,35 +73,35 @@ typedef struct
 
 
 
-/******************MT25TL01G_Transfer_t**********************/
+/******************MT25TL01G_Transfer_enu**********************/
 typedef enum
 {
   MT25TL01G_SPI_MODE = 0,                 /*!< 1-1-1 commands, Power on H/W default setting */
   MT25TL01G_SPI_2IO_MODE,                 /*!< 1-1-2, 1-2-2 read commands                   */
   MT25TL01G_SPI_4IO_MODE,                 /*!< 1-1-4, 1-4-4 read commands                   */
   MT25TL01G_QPI_MODE                      /*!< 4-4-4 commands                               */
-} MT25TL01G_Interface_t;
+} MT25TL01G_Interface_enu;
 
-/******************MT25TL01G_Transfer_t**********************/
+/******************MT25TL01G_Transfer_enu**********************/
 
 typedef enum
 {
   MT25TL01G_STR_TRANSFER = 0,             /* Single Transfer Rate */
   MT25TL01G_DTR_TRANSFER                  /* Double Transfer Rate */
-} MT25TL01G_Transfer_t;
+} MT25TL01G_Transfer_enu;
 
-/******************MT25TL01G_DualFlash_t**********************/
+/******************MT25TL01G_DualFlash_enu**********************/
 
 
 typedef enum
 {
   MT25TL01G_DUALFLASH_DISABLE = QSPI_DUALFLASH_DISABLE, /*!<  Single flash mode              */
   MT25TL01G_DUALFLASH_ENABLE  =QSPI_DUALFLASH_ENABLE
-} MT25TL01G_DualFlash_t;
+} MT25TL01G_DualFlash_enu;
 
 
 
-/******************MT25TL01G_Erase_t**********************/
+/******************MT25TL01G_Erase_enu**********************/
 
 
 typedef enum
@@ -110,7 +110,7 @@ typedef enum
   MT25TL01G_ERASE_32K,                    /*!< 32K size Block erase */
   MT25TL01G_ERASE_64K,                    /*!< 64K size Block erase */
   MT25TL01G_ERASE_CHIP                    /*!< Whole chip erase     */
-} MT25TL01G_Erase_t;
+} MT25TL01G_Erase_enu;
 /**
   * @}
   */
@@ -309,33 +309,33 @@ typedef enum
   */
 
 int32_t MT25TL01G_GetFlashInfo(MT25TL01G_Info_t *pInfo);
-int32_t MT25TL01G_Enter4BytesAddressMode(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_Exit4BytesAddressMode(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_AutoPollingMemReady(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
+int32_t MT25TL01G_Enter4BytesAddressMode(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_Exit4BytesAddressMode(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_AutoPollingMemReady(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
 /* Register/Setting Commands *************************************************/
-int32_t MT25TL01G_WriteEnable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_BlockErase(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint32_t BlockAddress, MT25TL01G_Erase_t BlockSize);
-int32_t MT25TL01G_ChipErase(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_PageProgram(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *pData, uint32_t WriteAddr, uint32_t Size);
-int32_t MT25TL01G_ReadSTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *pData, uint32_t ReadAddr, uint32_t Size);
-int32_t MT25TL01G_ReadDTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *pData, uint32_t ReadAddr, uint32_t Size);
-int32_t MT25TL01G_ReadStatusRegister(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *Value);
+int32_t MT25TL01G_WriteEnable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_BlockErase(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint32_t BlockAddress, MT25TL01G_Erase_enu BlockSize);
+int32_t MT25TL01G_ChipErase(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_PageProgram(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *pData, uint32_t WriteAddr, uint32_t Size);
+int32_t MT25TL01G_ReadSTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *pData, uint32_t ReadAddr, uint32_t Size);
+int32_t MT25TL01G_ReadDTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *pData, uint32_t ReadAddr, uint32_t Size);
+int32_t MT25TL01G_ReadStatusRegister(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *Value);
 int32_t MT25TL01G_EnterQPIMode(QSPI_HandleTypeDef *Ctx);
 int32_t MT25TL01G_ExitQPIMode(QSPI_HandleTypeDef *Ctx);
 
-int32_t MT25TL01G_EnableMemoryMappedModeSTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_EnableMemoryMappedModeDTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_WriteDisable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_ReadID(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *ID);
+int32_t MT25TL01G_EnableMemoryMappedModeSTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_EnableMemoryMappedModeDTR(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_WriteDisable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_ReadID(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *ID);
 
-int32_t MT25TL01G_ResetMemory(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_ResetEnable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
+int32_t MT25TL01G_ResetMemory(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_ResetEnable(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
 
-int32_t MT25TL01G_ReadSPBLockRegister(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode, uint8_t *SPBRegister);
-int32_t MT25TL01G_ReleaseFromDeepPowerDown(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_EnterDeepPowerDown(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_ProgEraseResume(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
-int32_t MT25TL01G_ProgEraseSuspend(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_t Mode);
+int32_t MT25TL01G_ReadSPBLockRegister(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode, uint8_t *SPBRegister);
+int32_t MT25TL01G_ReleaseFromDeepPowerDown(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_EnterDeepPowerDown(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_ProgEraseResume(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
+int32_t MT25TL01G_ProgEraseSuspend(QSPI_HandleTypeDef *Ctx, MT25TL01G_Interface_enu Mode);
 /**
   * @}
   */

@@ -26,16 +26,16 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32xxxx.h"
-#include "stm32xxxx_hal.h"
+#include "stm32h7xx.h"
+#include "stm32h7xx_hal.h"
 
 /** @addtogroup BSP
   * @{
   */
 
-#define CONF_MT25TL01G_READ_ENHANCE      0                       /* MMP performance enhance reade enable/disable */
+// #define CONF_MT25TL01G_READ_ENHANCE      0                       /* MMP performance enhance reade enable/disable */
 
-#define CONF_QSPI_ODS                   MT25TL01G_CR_ODS_15
+// #define CONF_QSPI_ODS                   MT25TL01G_CR_ODS_15
 
 #define CONF_QSPI_DUMMY_CLOCK                 8U
 
