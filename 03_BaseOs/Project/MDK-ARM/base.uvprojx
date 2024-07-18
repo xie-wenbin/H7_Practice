@@ -362,7 +362,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -371,7 +371,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x38000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\base.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -553,6 +553,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appQspi.c</FilePath>
             </File>
+            <File>
+              <FileName>appSd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\appSd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -699,6 +704,11 @@
               <FileName>bsp_qspi_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_qspi_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\bsp\bsp_sdio_sd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -971,6 +981,21 @@
               <FileName>stm32h7xx_hal_qspi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_sd_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_ll_sdmmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1584,6 +1609,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appQspi.c</FilePath>
             </File>
+            <File>
+              <FileName>appSd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\appSd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1661,6 +1691,11 @@
               <FileName>bsp_qspi_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_qspi_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\bsp\bsp_sdio_sd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1864,6 +1899,21 @@
               <FileName>stm32h7xx_hal_qspi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_sd_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_ll_sdmmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</FilePath>
             </File>
           </Files>
         </Group>

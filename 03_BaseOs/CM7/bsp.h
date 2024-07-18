@@ -61,6 +61,7 @@
 #include "bsp_fmc_sdram.h"
 #include "bsp_lcd.h"
 #include "bsp_qspi_flash.h"
+#include "bsp_sdio_sd.h"
 
 int32_t BSP_GetTick(void);
 void System_Init(void);

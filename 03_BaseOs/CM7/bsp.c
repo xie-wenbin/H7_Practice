@@ -139,6 +139,7 @@ void bsp_Init(void)
     bsp_LcdInit();
 
     bsp_InitQspiFlash_MT25();
+    BSP_SD_Init();
 
 }
 

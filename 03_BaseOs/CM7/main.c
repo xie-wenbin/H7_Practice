@@ -128,6 +128,7 @@ int main(void)
 }
 
 extern void appQspi_demo(void);
+extern void SD_DMA_demo(uint8_t mode);
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: AppTaskPeripheral
@@ -139,12 +140,17 @@ extern void appQspi_demo(void);
 */
 void AppTaskPeripheral(void *argument)
 {
+    SD_DMA_demo(0);
+    SD_DMA_demo(1);
+    SD_DMA_demo(2);
+
     while (1)
     {
         if (1 == gucJoyUKeyState)
         {
             gucJoyUKeyState = 0;
             appQspi_demo();
+            
         }
         else if (2 == gucJoyUKeyState)
         {

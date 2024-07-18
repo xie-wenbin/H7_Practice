@@ -176,6 +176,7 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
   BSP_TS_IRQHandler();
+  BSP_SD_DETECT_IRQHandler();
 }
 
 /**
@@ -200,7 +201,15 @@ void QUADSPI_IRQHandler(void)
   HAL_QSPI_IRQHandler(&hqspi);
 }
 
-
+/**
+  * @brief  This function handles SD interrupt request.
+  * @param  None
+  * @retval None
+  */
+void SDMMC1_IRQHandler(void)
+{
+  BSP_SD_IRQHandler();
+}
 /**
   * @}
   */
