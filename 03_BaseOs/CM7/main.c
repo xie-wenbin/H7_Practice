@@ -2,6 +2,7 @@
 #include "main.h"
 
 #include "appGUI.h"
+#include "appSd.h"
 
 /* Public variables ---------------------------------------------------------*/
 uint8_t gucWukpKeyState = 0xFF;
@@ -74,6 +75,7 @@ void AppTaskRoot(void *argument);
 void AppTaskUserIF(void *argument);
 void AppTaskLED(void *argument);
 void AppTaskPeripheral(void *argument);
+
 static void AppTaskCreate (void);
 static void PrintfLogo(void);
 
@@ -128,7 +130,7 @@ int main(void)
 }
 
 extern void appQspi_demo(void);
-extern void SD_DMA_demo(uint8_t mode);
+
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskPeripheral
@@ -140,10 +142,6 @@ extern void SD_DMA_demo(uint8_t mode);
 */
 void AppTaskPeripheral(void *argument)
 {
-    SD_DMA_demo(0);
-    SD_DMA_demo(1);
-    SD_DMA_demo(2);
-
     while (1)
     {
         if (1 == gucJoyUKeyState)
@@ -191,6 +189,7 @@ void AppTaskGUI(void *argument)
 void AppTaskUserIF(void *argument)
 {
     uint8_t ucKeyCode;
+    uint8_t cmd;
 
     while (1)
     {
@@ -245,6 +244,46 @@ void AppTaskUserIF(void *argument)
                 /* 其他的键值不处理 */
                 default:
                     break;
+            }
+        }
+
+        if (comGetChar(SERIAL_COM1, &cmd)) /* 从串口读入一个字符(非阻塞方式) */
+        {
+            printf("\r\n");
+            switch (cmd)
+            {
+            case '1':
+                printf("【1 - ViewRootDir】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_SHOW_ROOTDIR);
+                break;
+
+            case '2':
+                printf("【2 - CreateNewFile】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_NEWFILE);
+                break;
+
+            case '3':
+                printf("【3 - ReadFileData】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_READFILE);
+                break;
+
+            case '4':
+                printf("【4 - CreateDir】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_NEWDIR);
+                break;
+
+            case '5':
+                printf("【5 - DeleteDirFile】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_DELETEALL);
+                break;
+
+            case '6':
+                printf("【6 - TestSpeed】\r\n");
+                osEventFlagsSet(gEventId_sdapp, APPSD_EVT_SPEED_TEST);
+                break;
+
+            default:
+                break;
             }
         }
 
@@ -327,6 +366,8 @@ static void AppTaskCreate (void)
 	ThreadIdTaskUserIF = osThreadNew(AppTaskUserIF, NULL, &ThreadUserIF_Attr);
 	ThreadIdTaskGUI = osThreadNew(AppTaskGUI, NULL, &ThreadGUI_Attr);
     ThreadIdPeriph = osThreadNew(AppTaskPeripheral, NULL, &ThreadPeriph_Attr); 
+
+    appSd_CreateTask();
 }
 
 

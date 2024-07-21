@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx, USE_STM32H747I_DISCO,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Components\mt25tl01g;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\CM7\application_test</IncludePath>
+              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Components\mt25tl01g;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\Middlewares\Third_Party\FatFs\src;..\..\Middlewares\Third_Party\FatFs\src\drivers;..\..\CM7\application_test</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1051,6 +1051,46 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Middlewares\Third_Party\FreeRTOS\portable\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/FatFS</GroupName>
+          <Files>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffconf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ffconf.h</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>syscall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\option\syscall.c</FilePath>
+            </File>
+            <File>
+              <FileName>cc936.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\option\cc936.c</FilePath>
+            </File>
+            <File>
+              <FileName>sd_diskio_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio_dma.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1969,6 +2009,46 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Middlewares\Third_Party\FreeRTOS\portable\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/FatFS</GroupName>
+          <Files>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffconf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ffconf.h</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>syscall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\option\syscall.c</FilePath>
+            </File>
+            <File>
+              <FileName>cc936.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\option\cc936.c</FilePath>
+            </File>
+            <File>
+              <FileName>sd_diskio_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio_dma.c</FilePath>
             </File>
           </Files>
         </Group>
