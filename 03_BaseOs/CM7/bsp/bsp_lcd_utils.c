@@ -123,10 +123,10 @@ void LCD_UTIL_GetPixel(uint16_t Xpos, uint16_t Ypos, uint32_t *Color)
 void LCD_UTIL_SetPixel(uint16_t Xpos, uint16_t Ypos, uint32_t Color)
 {
     /* Set Pixel */
-    uint32_t inputcolor = 0;
+    uint32_t inputcolor = Color;
     if (DrawProp->LcdPixelFormat == LCD_PIXEL_FORMAT_RGB565)
     {
-        inputcolor |= (uint16_t)CONVERTARGB88882RGB565(Color);
+        // inputcolor |= (uint16_t)CONVERTARGB88882RGB565(Color);
         BSP_LCD_WritePixel(Xpos, Ypos, inputcolor);
     }
     else
@@ -604,7 +604,7 @@ void LCD_UTIL_FillRect(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t He
     /* Fill the rectangle */
     if (DrawProp->LcdPixelFormat == LCD_PIXEL_FORMAT_RGB565)
     {
-        BSP_LCD_FillRect(Xpos, Ypos, Width, Height, CONVERTARGB88882RGB565(Color));
+        BSP_LCD_FillRect(Xpos, Ypos, Width, Height, /* CONVERTARGB88882RGB565 */(Color));
     }
     else
     {

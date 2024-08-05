@@ -239,7 +239,7 @@ static void LCD_LayerInit(uint16_t LayerIndex, uint32_t Address)
     layercfg.WindowX1 = LCD_DEFAULT_WIDTH;
     layercfg.WindowY0 = 0;
     layercfg.WindowY1 = LCD_DEFAULT_HEIGHT;
-    layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+    layercfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
     layercfg.FBStartAdress = Address;
     layercfg.Alpha = 255;
     layercfg.Alpha0 = 0;
@@ -335,7 +335,7 @@ void LCD_DSI_Init(void)
     LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
     LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
     LPCmd.LPMaxReadPacket       = DSI_LP_MRDP_ENABLE;
-    LPCmd.AcknowledgeRequest    = DSI_ACKNOWLEDGE_DISABLE;
+    LPCmd.AcknowledgeRequest    = DSI_ACKNOWLEDGE_ENABLE;
     if (HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd) != HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
@@ -360,6 +360,11 @@ void LCD_DSI_Init(void)
         Error_Handler(__FILE__, __LINE__);
     }
 
+    if (HAL_DSI_SetGenericVCID(&hlcd_dsi, 0) != HAL_OK)
+    {
+        Error_Handler(__FILE__, __LINE__);
+    }
+
     /* Start DSI */
     HAL_DSI_Start(&hlcd_dsi);
 
@@ -378,7 +383,7 @@ void LCD_OTM8009A_IcDriverInit(uint8_t orientation)
     IOCtx.ReadReg     = DSI_IO_Read;
     OTM8009A_RegisterBusIO(&OTM8009AObj, &IOCtx);
     Lcd_CompObj = (&OTM8009AObj);
-    OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB888, orientation);
+    OTM8009A_Init(Lcd_CompObj, OTM8009A_COLMOD_RGB565, orientation);
 
 
     LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
@@ -393,6 +398,7 @@ void LCD_OTM8009A_IcDriverInit(uint8_t orientation)
     LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
     LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
     HAL_DSI_ConfigCommand(&hlcd_dsi, &LPCmd);
+    HAL_DSI_ShortWrite(&hlcd_dsi, 0, DSI_DCS_SHORT_PKT_WRITE_P1, OTM8009A_CMD_DISPOFF, 0x00);
 
     // HAL_DSI_ConfigFlowControl(&hlcd_dsi, DSI_FLOW_CONTROL_BTA);
     // HAL_DSI_ForceRXLowPower(&hlcd_dsi, ENABLE);  
@@ -456,7 +462,7 @@ static int32_t DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, ui
 void LCD_InitDMA2D(void)
 {
     hlcd_dma2d.Init.Mode = DMA2D_R2M;
-    hlcd_dma2d.Init.ColorMode = DMA2D_INPUT_ARGB8888;
+    hlcd_dma2d.Init.ColorMode = DMA2D_INPUT_RGB565;
     hlcd_dma2d.Init.OutputOffset = 0x0;
 
     hlcd_dma2d.Instance = DMA2D;
@@ -486,7 +492,6 @@ void DMA2D_IRQHandler(void)
 {
     HAL_DMA2D_IRQHandler(&hlcd_dma2d);
 }
-
 
 /**
  * @brief  Initializes the DSI LCD.
@@ -526,6 +531,8 @@ void LCD_HwInit(uint8_t orientation)
 
     /* Enable DSI Wrapper so DSI IP will drive the LTDC */
     __HAL_DSI_WRAPPER_ENABLE(&hlcd_dsi);
+
+    HAL_DSI_ShortWrite(&hlcd_dsi, 0, DSI_DCS_SHORT_PKT_WRITE_P1, OTM8009A_CMD_DISPON, 0x00);
 
     /*Refresh the LCD display*/
     HAL_DSI_Refresh(&hlcd_dsi);  

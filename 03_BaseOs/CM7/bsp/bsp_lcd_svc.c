@@ -494,7 +494,7 @@ static void LL_DMA2D_FillBuffer(uint32_t *pDst, uint32_t xSize, uint32_t ySize, 
     {
     case LCD_PIXEL_FORMAT_RGB565:
         output_color_mode = DMA2D_OUTPUT_RGB565; /* RGB565 */
-        // input_color = CONVERTRGB5652ARGB8888(Color);
+        input_color |= CONVERTARGB88882RGB565(Color);
         break;
     case LCD_PIXEL_FORMAT_RGB888:
     default:
@@ -604,6 +604,90 @@ static void LL_DMA2D_ConvertLineToRGB(uint32_t *pSrc, uint32_t *pDst, uint32_t x
 #endif
 }
 
+/**
+  * @brief  Copy a buffer.
+  * @param  pSrc: Pointer to source buffer
+  * @param  pDst: Output color
+  * @param  xSize: Buffer width
+  * @param  ColorMode: Input color mode   
+  * @retval None
+  */
+void LL_DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
+{
+    uint32_t regValue;
+    uint32_t destination = (uint32_t)*pDst;
+    uint32_t source      = (uint32_t)pSrc;
+
+    uint32_t output_color_mode;
+
+    switch (glcd_ctx.PixelFormat)
+    {
+    case LCD_PIXEL_FORMAT_RGB565:
+        output_color_mode = DMA2D_OUTPUT_RGB565; /* RGB565 */
+        break;
+    case LCD_PIXEL_FORMAT_RGB888:
+    default:
+        output_color_mode = DMA2D_OUTPUT_ARGB8888; /* ARGB8888 */
+        break;
+    }
+
+    /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
+    hlcd_dma2d.Init.Mode = DMA2D_M2M;
+    hlcd_dma2d.Init.ColorMode = output_color_mode;
+    hlcd_dma2d.Init.OutputOffset = glcd_ctx.XSize - xsize;
+    hlcd_dma2d.Init.AlphaInverted = DMA2D_REGULAR_ALPHA; /* No Output Alpha Inversion*/
+    hlcd_dma2d.Init.RedBlueSwap = DMA2D_RB_REGULAR;      /* No Output Red & Blue swap */
+
+    /*##-2- Foreground Configuration ###########################################*/
+    hlcd_dma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+    hlcd_dma2d.LayerCfg[1].InputAlpha = 0xFF;
+    hlcd_dma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+    hlcd_dma2d.LayerCfg[1].InputOffset = 0;
+    hlcd_dma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;      /* No ForeGround Red/Blue swap */
+    hlcd_dma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
+
+    hlcd_dma2d.Instance = DMA2D;
+#if 1
+    DMA2D->CR = hlcd_dma2d.Init.Mode;
+    DMA2D->OPFCCR = hlcd_dma2d.Init.ColorMode;
+    DMA2D->OOR = hlcd_dma2d.Init.OutputOffset;
+    DMA2D->OPFCCR |= (hlcd_dma2d.Init.AlphaInverted << DMA2D_OPFCCR_AI_Pos) | (hlcd_dma2d.Init.RedBlueSwap << DMA2D_OPFCCR_RBS_Pos);
+
+    regValue = hlcd_dma2d.LayerCfg[1].InputColorMode | \
+              (hlcd_dma2d.LayerCfg[1].AlphaMode << DMA2D_BGPFCCR_AM_Pos) | \
+              (hlcd_dma2d.LayerCfg[1].AlphaInverted << DMA2D_BGPFCCR_AI_Pos) | \
+              (hlcd_dma2d.LayerCfg[1].RedBlueSwap << DMA2D_BGPFCCR_RBS_Pos) | \
+              (hlcd_dma2d.LayerCfg[1].InputAlpha << DMA2D_BGPFCCR_ALPHA_Pos);
+
+    DMA2D->FGPFCCR = hlcd_dma2d.Init.ColorMode /* | (0xFF << DMA2D_BGPFCCR_ALPHA_Pos) | (DMA2D_NO_MODIF_ALPHA << DMA2D_BGPFCCR_AM_Pos) */;
+    DMA2D->FGOR = hlcd_dma2d.LayerCfg[1].InputOffset;
+    DMA2D->FGPFCCR |= regValue;
+
+    DMA2D->NLR = ysize | (xsize << DMA2D_NLR_PL_Pos);
+    DMA2D->OMAR = (uint32_t)destination;
+    DMA2D->FGMAR = (uint32_t)source;
+
+    DMA2D->CR     |= DMA2D_CR_START; 
+    while (DMA2D->CR & DMA2D_CR_START) 
+    {
+    }
+#else
+    /* DMA2D Initialization */
+    if (HAL_DMA2D_Init(&hlcd_dma2d) == HAL_OK)
+    {
+        if (HAL_DMA2D_ConfigLayer(&hlcd_dma2d, 1) == HAL_OK)
+        {
+            if (HAL_DMA2D_Start(&hlcd_dma2d, source, destination, xsize, ysize) == HAL_OK)
+            {
+                /* Polling For DMA transfer */
+                HAL_DMA2D_PollForTransfer(&hlcd_dma2d, 50);
+            }
+        }
+    }
+#endif
+
+}
+
 
 /**
  * @brief  Draw a horizontal line on LCD with multibuffer color.
@@ -647,7 +731,15 @@ int32_t BSP_LCD_FillRGBRect(uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32
     {
         for (j = 0; j < Width; j++)
         {
-            color = *pData | (*(pData + 1) << 8) | (*(pData + 2) << 16) | (*(pData + 3) << 24);
+            if (glcd_ctx.PixelFormat == LCD_PIXEL_FORMAT_RGB565)
+            {
+                color = *pData | (*(pData + 1) << 8);
+            }
+            else
+            {
+                color = *pData | (*(pData + 1) << 8) | (*(pData + 2) << 16) | (*(pData + 3) << 24);
+            }
+            
             BSP_LCD_WritePixel(Xpos + j, Ypos + i, color);
             pData += glcd_ctx.BppFactor;
         }
@@ -800,8 +892,8 @@ void BSP_LCD_InitContext(void)
 {
     /* Set the LCD Context default value*/
     glcd_ctx.ActiveLayer = 0;
-    glcd_ctx.PixelFormat = LCD_PIXEL_FORMAT_ARGB8888;
-    glcd_ctx.BppFactor = 4; /* 4 Bytes Per Pixel for ARGB8888 */  
+    glcd_ctx.PixelFormat = LCD_PIXEL_FORMAT_RGB565;
+    glcd_ctx.BppFactor = 2; /* 4 Bytes Per Pixel for ARGB8888 */  
     glcd_ctx.XSize = LCD_DEFAULT_WIDTH;  
     glcd_ctx.YSize = LCD_DEFAULT_HEIGHT;
     glcd_ctx.Orientation = LCD_ORIENTATION_LANDSCAPE;
@@ -809,4 +901,14 @@ void BSP_LCD_InitContext(void)
     LCD_HwInit(LCD_ORIENTATION_LANDSCAPE);
 
     Lcd_Drv = (LCD_Drv_t *)(void *) &OTM8009A_LCD_Driver;
+}
+
+void BSP_LCD_ColorFill(uint16_t Xpos, uint16_t Ypos, uint16_t xSize, uint16_t ySize, uint32_t *color)
+{
+    uint32_t addr;
+
+    /* Get the rectangle start address */
+    addr = (hlcd_ltdc.LayerCfg[glcd_ctx.ActiveLayer].FBStartAdress) + (glcd_ctx.BppFactor*(glcd_ctx.XSize*Ypos + Xpos));
+
+    LL_DMA2D_CopyBuffer((uint32_t*)color, &addr, Xpos, Ypos, xSize, ySize);
 }

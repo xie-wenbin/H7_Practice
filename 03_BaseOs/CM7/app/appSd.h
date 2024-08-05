@@ -18,6 +18,10 @@
 #define APPSD_EVT_DELETEALL    (0x01 << 7)
 #define APPSD_EVT_SPEED_TEST   (0x01 << 8)
 
+#define APPSD_EVT_SHOW_FRT_PIC   (0x01 << 9)
+#define APPSD_EVT_SHOW_NEXT_PIC  (0x01 << 10)
+#define APPSD_EVT_SHOW_PREV_PIC  (0x01 << 11)
+
 
 /* Exported variavles ------------------------------------------------------------*/
 extern osThreadId_t ThreadIdSdMainProc;

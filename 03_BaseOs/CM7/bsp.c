@@ -31,7 +31,7 @@ static void MPU_Config(void);
   */
 int32_t BSP_GetTick(void)
 {
-  return (int32_t)HAL_GetTick();
+    return (int32_t)HAL_GetTick();
 }
 
 /**
@@ -134,6 +134,8 @@ void bsp_Init(void)
     bsp_InitTimer();
     bsp_InitAllLed();
     bsp_InitUart();
+    InitMem();
+    
     bsp_InitExtSDRAM(SDRAM_DEVICE01_INSTANCE);
     bsp_LcdInit();
 
@@ -280,6 +282,71 @@ static void MPU_Config(void)
 
     HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
+#if(1 == BSP_USE_MEMORY_MALLOC)
+    /* 配置SRAM1的属性为Write through, read allocate，no write allocate */
+    MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress      = 0x30000000;
+    MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_128KB;	
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+    MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE;
+    MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.Number           = MPU_REGION_NUMBER3;
+    MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+    /* 配置SRAM2的属性为Write through, read allocate，no write allocate */
+    MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress      = 0x30020000;
+    MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_128KB;	
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+    MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE;
+    MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.Number           = MPU_REGION_NUMBER4;
+    MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+
+    /* 配置SRAM3的属性为Write through, read allocate，no write allocate */
+    MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress      = 0x30040000;
+    MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_32KB;	
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+    MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE;
+    MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.Number           = MPU_REGION_NUMBER5;
+    MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+
+    /* 配置SRAM4的属性为Write through, read allocate，no write allocate */
+    MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress      = 0x38000000;
+    MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_64KB;	
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
+    MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE;
+    MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.Number           = MPU_REGION_NUMBER6;
+    MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+#endif
+
+
     /* Configure the MPU QSPI flash */
     // MPU_InitStruct.Enable = MPU_REGION_ENABLE;
     // MPU_InitStruct.BaseAddress = 0x90000000;
@@ -326,7 +393,7 @@ void Error_Handler(char *file, uint32_t line)
       User can add his own implementation to report the file name and line number
       printf("Wrong parameters value: file %s on line %d\r\n", file, line) 
     */
-   printf("Wrong parameters value: file %s on line %d\r\n", file, line);
+    printf("Wrong parameters value: file %s on line %d\r\n", file, line);
     
     /* Infinite loop */
     if (line == 0)

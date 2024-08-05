@@ -8,6 +8,7 @@
         "**/Thumbs.db": true,
 
         "**/Project/MDK-ARM":true,
+        "**/Project/MDK-ARM/base.sct":false,
         "**/Project/SI":true,
         "**/CM4":true
     }

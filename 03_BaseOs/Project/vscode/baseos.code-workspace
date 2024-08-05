@@ -45,6 +45,7 @@
 			"stlogo.h": "c"
 		},
 		"editor.tabSize": 4,
-		"editor.detectIndentation": true
+		"editor.detectIndentation": true,
+		"files.encoding": "gb2312"
 	}
 }

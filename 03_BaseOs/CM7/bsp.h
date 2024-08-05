@@ -44,6 +44,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+//memory alloc
+#include "bsp_memory.h"
+
 #ifndef TRUE
     #define TRUE  1
 #endif

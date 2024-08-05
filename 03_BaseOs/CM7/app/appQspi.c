@@ -1,5 +1,5 @@
 #include "bsp.h"
-
+#include "utils.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -11,8 +11,6 @@
 uint8_t qspi_aTxBuffer[BUFFER_SIZE];
 uint8_t qspi_aRxBuffer[BUFFER_SIZE];
 /* Private function prototypes -----------------------------------------------*/
-static void     Fill_Buffer (uint8_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset);
-static uint8_t  Buffercmp   (uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength);
 
 
 void appQspi_demo(void)
@@ -98,48 +96,5 @@ void appQspi_demo(void)
             }
         }
     }
-}
-
-
-
-/**
-  * @brief  Fills buffer with user predefined data.
-  * @param  pBuffer: pointer on the buffer to fill
-  * @param  uwBufferLenght: size of the buffer to fill
-  * @param  uwOffset: first value to fill on the buffer
-  * @retval None
-  */
-static void Fill_Buffer(uint8_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
-{
-  uint32_t tmpIndex = 0;
-
-  /* Put in global buffer different values */
-  for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
-  {
-    pBuffer[tmpIndex] = tmpIndex + uwOffset;
-  }
-}
-
-/**
-  * @brief  Compares two buffers.
-  * @param  pBuffer1, pBuffer2: buffers to be compared.
-  * @param  BufferLength: buffer's length
-  * @retval 1: pBuffer identical to pBuffer1
-  *         0: pBuffer differs from pBuffer1
-  */
-static uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength)
-{
-  while (BufferLength--)
-  {
-    if (*pBuffer1 != *pBuffer2)
-    {
-      return 1;
-    }
-
-    pBuffer1++;
-    pBuffer2++;
-  }
-
-  return 0;
 }
 

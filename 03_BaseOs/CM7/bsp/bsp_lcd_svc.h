@@ -16,11 +16,17 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h747i_discovery_errno.h"
 
+#if 0
+#define CONVERTARGB88882RGB565(argb) \
+    ((uint16_t)((((uint16_t)(((uint8_t)((argb) >> 16)) & 0xFF) >> 3) & 0x1F)) | \
+     ((((uint16_t)(((uint8_t)((argb) >> 8)) & 0xFF) & 0xFC) << 3)) | \
+     (((uint16_t)(((uint8_t)((argb)) & 0xFF)) & 0xF8) << 8))
 
+#else
 #define CONVERTARGB88882RGB565(Color)((((Color & 0xFFU) >> 3) & 0x1FU) |\
                                      (((((Color & 0xFF00U) >> 8) >>2) & 0x3FU) << 5) |\
                                      (((((Color & 0xFF0000U) >> 16) >>3) & 0x1FU) << 11))
-
+#endif
 #define CONVERTRGB5652ARGB8888(Color)(((((((Color >> 11) & 0x1FU) * 527) + 23) >> 6) << 16) |\
                                      ((((((Color >> 5) & 0x3FU) * 259) + 33) >> 6) << 8) |\
                                      ((((Color & 0x1FU) * 527) + 23) >> 6) | 0xFF000000)
@@ -94,5 +100,8 @@ int32_t BSP_LCD_FillRect(uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t 
 int32_t BSP_LCD_DrawHLine(uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
 int32_t BSP_LCD_DrawVLine(uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
 int32_t BSP_LCD_DrawBitmap(uint32_t Xpos, uint32_t Ypos, uint8_t *pBmp);
+
+
+void BSP_LCD_ColorFill(uint16_t Xpos, uint16_t Ypos, uint16_t xSize, uint16_t ySize, uint32_t *color);
 
 #endif /* BSP_LCD_SERVICE_H_ */

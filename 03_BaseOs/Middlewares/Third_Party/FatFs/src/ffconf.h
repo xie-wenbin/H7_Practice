@@ -310,14 +310,17 @@
 
 #if !defined(ff_malloc) || !defined(ff_free)
 #include <stdlib.h>
+#include "bsp_memory.h"  // 使用动态内存分配
 #endif
 
 #if !defined(ff_malloc)
-#define ff_malloc malloc
+// #define ff_malloc malloc
+#define ff_malloc AllocMemD1
 #endif
 
 #if !defined(ff_free)
-#define ff_free free
+// #define ff_free free
+#define ff_free FreeMemD1
 #endif
 
 /* by default the system malloc/free are used, but when the FreeRTOS is enabled

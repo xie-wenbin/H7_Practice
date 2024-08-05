@@ -20,10 +20,10 @@ static uint32_t touchscreen_color_idx = 0;
 /* Possible allowed indexes of touchscreen demo */
 typedef enum
 {
-  TOUCHSCREEN_DEMO_1 = 1,
-  TOUCHSCREEN_DEMO_2 = 2,
-  TOUCHSCREEN_DEMO_3 = 3,
-  TOUCHSCREEN_DEMO_MAX = TOUCHSCREEN_DEMO_3,
+    TOUCHSCREEN_DEMO_1 = 1,
+    TOUCHSCREEN_DEMO_2 = 2,
+    TOUCHSCREEN_DEMO_3 = 3,
+    TOUCHSCREEN_DEMO_MAX = TOUCHSCREEN_DEMO_3,
 
 } TouchScreenDemoTypeDef;
 
@@ -193,47 +193,47 @@ void TouchScreenDemo1(void)
   */
 static void Touchscreen_SetHint_Demo(TouchScreenDemoTypeDef demoIndex)
 {
-  uint32_t x_size, y_size;
+    uint32_t x_size, y_size;
 
-  BSP_LCD_GetXSize(&x_size);
-  BSP_LCD_GetYSize(&y_size);
+    BSP_LCD_GetXSize(&x_size);
+    BSP_LCD_GetYSize(&y_size);
 
-  if(demoIndex <= TOUCHSCREEN_DEMO_MAX)
-  {
-    /* Clear the LCD */
-    LCD_UTIL_Clear(LCD_UTIL_COLOR_WHITE);
-
-    /* Set Touchscreen Demo1 description */
-    LCD_UTIL_FillRect(0, 0, x_size, 80, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_BLUE);
-
-    if(demoIndex == TOUCHSCREEN_DEMO_1)
+    if(demoIndex <= TOUCHSCREEN_DEMO_MAX)
     {
-      LCD_UTIL_DisplayString(0, 0,  FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen basic polling", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please use the Touchscreen to", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate the colored circle", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"inside the rectangle. Then press User button", CENTER_MODE);
-    }
-    else if (demoIndex == TOUCHSCREEN_DEMO_2)
-    {
-      LCD_UTIL_DisplayString(0, 0, FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen dual touch polling", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please press the Touchscreen to", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate single and", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"dual touch", CENTER_MODE);
+        /* Clear the LCD */
+        LCD_UTIL_Clear(LCD_UTIL_COLOR_WHITE);
 
-    }
-    else /* demoIndex == TOUCHSCREEN_DEMO_3 */
-    {
-      LCD_UTIL_DisplayString(0, 0, FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen dual touch interrupt", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please press the Touchscreen to", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate single and", CENTER_MODE);
-      LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"dual touch", CENTER_MODE);
-    }
+        /* Set Touchscreen Demo1 description */
+        LCD_UTIL_FillRect(0, 0, x_size, 80, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_BLUE);
 
-    LCD_UTIL_DrawRect(10, 90, x_size - 20, y_size - 100, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawRect(11, 91, x_size - 22, y_size - 102, LCD_UTIL_COLOR_BLUE);
+        if(demoIndex == TOUCHSCREEN_DEMO_1)
+        {
+        LCD_UTIL_DisplayString(0, 0,  FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen basic polling", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please use the Touchscreen to", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate the colored circle", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"inside the rectangle. Then press User button", CENTER_MODE);
+        }
+        else if (demoIndex == TOUCHSCREEN_DEMO_2)
+        {
+        LCD_UTIL_DisplayString(0, 0, FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen dual touch polling", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please press the Touchscreen to", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate single and", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"dual touch", CENTER_MODE);
 
-  } /* of if(demoIndex <= TOUCHSCREEN_DEMO_MAX) */
+        }
+        else /* demoIndex == TOUCHSCREEN_DEMO_3 */
+        {
+        LCD_UTIL_DisplayString(0, 0, FONTSIZE_24, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Touchscreen dual touch interrupt", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 30, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Please press the Touchscreen to", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"activate single and", CENTER_MODE);
+        LCD_UTIL_DisplayString(0, 60, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"dual touch", CENTER_MODE);
+        }
+
+        LCD_UTIL_DrawRect(10, 90, x_size - 20, y_size - 100, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawRect(11, 91, x_size - 22, y_size - 102, LCD_UTIL_COLOR_BLUE);
+
+    } /* of if(demoIndex <= TOUCHSCREEN_DEMO_MAX) */
 }
 
 /**
@@ -243,91 +243,91 @@ static void Touchscreen_SetHint_Demo(TouchScreenDemoTypeDef demoIndex)
   */
 void Touchscreen_DrawBackground_Circles(uint8_t state)
 {
-  uint16_t x, y;
-  switch (state)
-  {
-  case 0:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+    uint16_t x, y;
+    switch (state)
+    {
+    case 0:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
 
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_RED);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_RED);
 
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_YELLOW);
-
-
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_GREEN);
-
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    break;
-
-  case 1:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    break;
-
-  case 2:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_RED);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    break;
-
-  case 4:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_YELLOW);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    break;
-
-  case 8:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, LCD_UTIL_COLOR_GREEN);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    break;
-
-  case 16:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
-
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-
-    LCD_UTIL_DrawHLine(CIRCLE_XPOS(1)-LINE_LENGHT, CIRCLE_YPOS(1), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawHLine(CIRCLE_XPOS(2)-LINE_LENGHT, CIRCLE_YPOS(2), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawVLine(CIRCLE_XPOS(2), CIRCLE_YPOS(2)-LINE_LENGHT, 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawHLine(CIRCLE_XPOS(3)-LINE_LENGHT, CIRCLE_YPOS(3), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawHLine(CIRCLE_XPOS(4)-LINE_LENGHT, CIRCLE_YPOS(4), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawVLine(CIRCLE_XPOS(4), CIRCLE_YPOS(4)-LINE_LENGHT, 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
-
-    LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_WHITE);
-    x = CIRCLE_XPOS(1);
-    y = CIRCLE_YPOS(1) - CIRCLE_RADIUS - LCD_UTIL_GetFont()->Height;
-    LCD_UTIL_DisplayString(x, y, FONTSIZE_24, LCD_UTIL_COLOR_BLUE, (uint8_t *)"Volume", CENTER_MODE);
-    x = CIRCLE_XPOS(4);
-    y = CIRCLE_YPOS(4) - CIRCLE_RADIUS - LCD_UTIL_GetFont()->Height;
-    LCD_UTIL_DisplayString(x, y, FONTSIZE_24, LCD_UTIL_COLOR_BLUE, (uint8_t *)"Frequency", CENTER_MODE);
-
-    break;
-
-  case 32:
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLACK);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLACK);
-
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
-    LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_YELLOW);
 
 
-    LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_WHITE);
-    x = CIRCLE_XPOS(1) - 10;
-    y = CIRCLE_YPOS(1) - (LCD_UTIL_GetFont()->Height)/2;
-    LCD_UTIL_DisplayString(x, y, FONTSIZE_20, LCD_UTIL_COLOR_BLACK, (uint8_t *)"Up", LEFT_MODE);
-    x = CIRCLE_XPOS(2) - 10;
-    y = CIRCLE_YPOS(3)  - (LCD_UTIL_GetFont()->Height)/2;
-    LCD_UTIL_DisplayString(x, y, FONTSIZE_20, LCD_UTIL_COLOR_BLACK, (uint8_t *)"Dw", LEFT_MODE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_GREEN);
 
-    break;
-  }
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        break;
+
+    case 1:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        break;
+
+    case 2:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_RED);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        break;
+
+    case 4:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_YELLOW);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        break;
+
+    case 8:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, LCD_UTIL_COLOR_GREEN);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        break;
+
+    case 16:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLUE);
+
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+
+        LCD_UTIL_DrawHLine(CIRCLE_XPOS(1)-LINE_LENGHT, CIRCLE_YPOS(1), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawHLine(CIRCLE_XPOS(2)-LINE_LENGHT, CIRCLE_YPOS(2), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawVLine(CIRCLE_XPOS(2), CIRCLE_YPOS(2)-LINE_LENGHT, 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawHLine(CIRCLE_XPOS(3)-LINE_LENGHT, CIRCLE_YPOS(3), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawHLine(CIRCLE_XPOS(4)-LINE_LENGHT, CIRCLE_YPOS(4), 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawVLine(CIRCLE_XPOS(4), CIRCLE_YPOS(4)-LINE_LENGHT, 2*LINE_LENGHT, LCD_UTIL_COLOR_BLUE);
+
+        LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_WHITE);
+        x = CIRCLE_XPOS(1);
+        y = CIRCLE_YPOS(1) - CIRCLE_RADIUS - LCD_UTIL_GetFont()->Height;
+        LCD_UTIL_DisplayString(x, y, FONTSIZE_24, LCD_UTIL_COLOR_BLUE, (uint8_t *)"Volume", CENTER_MODE);
+        x = CIRCLE_XPOS(4);
+        y = CIRCLE_YPOS(4) - CIRCLE_RADIUS - LCD_UTIL_GetFont()->Height;
+        LCD_UTIL_DisplayString(x, y, FONTSIZE_24, LCD_UTIL_COLOR_BLUE, (uint8_t *)"Frequency", CENTER_MODE);
+
+        break;
+
+    case 32:
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLACK);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, LCD_UTIL_COLOR_BLACK);
+
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, LCD_UTIL_COLOR_WHITE);
+
+
+        LCD_UTIL_SetBackColor(LCD_UTIL_COLOR_WHITE);
+        x = CIRCLE_XPOS(1) - 10;
+        y = CIRCLE_YPOS(1) - (LCD_UTIL_GetFont()->Height)/2;
+        LCD_UTIL_DisplayString(x, y, FONTSIZE_20, LCD_UTIL_COLOR_BLACK, (uint8_t *)"Up", LEFT_MODE);
+        x = CIRCLE_XPOS(2) - 10;
+        y = CIRCLE_YPOS(3)  - (LCD_UTIL_GetFont()->Height)/2;
+        LCD_UTIL_DisplayString(x, y, FONTSIZE_20, LCD_UTIL_COLOR_BLACK, (uint8_t *)"Dw", LEFT_MODE);
+
+        break;
+    }
 }
 
 
@@ -384,36 +384,36 @@ void BSP_TS_Callback(void)
 
 static void TS_Update(void)
 {
-  uint16_t i, j;
+    uint16_t i, j;
 
-  BSP_TS_GetState(&TS_State);
-  if(TS_State.TouchDetected)
-  {
-    /* One or dual touch have been detected          */
-    /* Only take into account the first touch so far */
-
-    /* Get X and Y position of the first touch post calibrated */
-    x_new_pos = TS_State.TouchX;
-    y_new_pos = TS_State.TouchY;
-
-    for(i = 0; i < hTS->Width/40; i++)
+    BSP_TS_GetState(&TS_State);
+    if(TS_State.TouchDetected)
     {
-      for(j = 0; j < hTS->Height/40; j++)
-      {
-        if(((x_new_pos > 40*i) && (x_new_pos < 40*(i+1))) && ((y_new_pos > 40*j) && (y_new_pos < 40*(j+1))))
+        /* One or dual touch have been detected          */
+        /* Only take into account the first touch so far */
+
+        /* Get X and Y position of the first touch post calibrated */
+        x_new_pos = TS_State.TouchX;
+        y_new_pos = TS_State.TouchY;
+
+        for(i = 0; i < hTS->Width/40; i++)
         {
-          LCD_UTIL_FillRect(x_previous_pos, y_previous_pos,40,40, LCD_UTIL_COLOR_WHITE);
-          LCD_UTIL_DrawRect(x_previous_pos, y_previous_pos,40,40, LCD_UTIL_COLOR_BLACK);
+        for(j = 0; j < hTS->Height/40; j++)
+        {
+            if(((x_new_pos > 40*i) && (x_new_pos < 40*(i+1))) && ((y_new_pos > 40*j) && (y_new_pos < 40*(j+1))))
+            {
+            LCD_UTIL_FillRect(x_previous_pos, y_previous_pos,40,40, LCD_UTIL_COLOR_WHITE);
+            LCD_UTIL_DrawRect(x_previous_pos, y_previous_pos,40,40, LCD_UTIL_COLOR_BLACK);
 
-          LCD_UTIL_FillRect(40*i, 40*j,40,40, colors[(touchscreen_color_idx++ % 24)]);
+            LCD_UTIL_FillRect(40*i, 40*j,40,40, colors[(touchscreen_color_idx++ % 24)]);
 
-          x_previous_pos = 40*i;
-          y_previous_pos = 40*j;
-          break;
+            x_previous_pos = 40*i;
+            y_previous_pos = 40*j;
+            break;
+            }
         }
-      }
+        }
     }
-  }
 }
 
 /**
@@ -423,120 +423,120 @@ static void TS_Update(void)
   */
 static uint32_t Touchscreen_Handle_NewTouch(void)
 {
-  uint32_t GestureId = GESTURE_ID_NO_GESTURE;
-#define TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS 15
-#define TOUCH_INFO_STRING_SIZE                70
-  uint16_t x1 = 0;
-  uint16_t y1 = 0;
-  uint16_t x2 = 0;
-  uint16_t y2 = 0;
-  uint32_t drawTouch1 = 0; /* activate/deactivate draw of footprint of touch 1 */
-  uint32_t drawTouch2 = 0; /* activate/deactivate draw of footprint of touch 2 */
-  uint32_t colors[24] = {LCD_UTIL_COLOR_BLUE, LCD_UTIL_COLOR_GREEN, LCD_UTIL_COLOR_RED, LCD_UTIL_COLOR_CYAN, LCD_UTIL_COLOR_MAGENTA, LCD_UTIL_COLOR_YELLOW,
-  LCD_UTIL_COLOR_LIGHTBLUE, LCD_UTIL_COLOR_LIGHTGREEN, LCD_UTIL_COLOR_LIGHTRED, LCD_UTIL_COLOR_LIGHTCYAN, LCD_UTIL_COLOR_LIGHTMAGENTA,
-  LCD_UTIL_COLOR_LIGHTYELLOW, LCD_UTIL_COLOR_DARKBLUE, LCD_UTIL_COLOR_DARKGREEN, LCD_UTIL_COLOR_DARKRED, LCD_UTIL_COLOR_DARKCYAN,
-  LCD_UTIL_COLOR_DARKMAGENTA, LCD_UTIL_COLOR_DARKYELLOW, LCD_UTIL_COLOR_LIGHTGRAY, LCD_UTIL_COLOR_GRAY, LCD_UTIL_COLOR_DARKGRAY,
-  LCD_UTIL_COLOR_BLACK, LCD_UTIL_COLOR_BROWN, LCD_UTIL_COLOR_ORANGE };
-  uint32_t ts_status = BSP_ERROR_NONE;
-  uint8_t lcd_string[TOUCH_INFO_STRING_SIZE] = "";
-  uint32_t x_size, y_size;
+    uint32_t GestureId = GESTURE_ID_NO_GESTURE;
+    #define TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS 15
+    #define TOUCH_INFO_STRING_SIZE                70
+    uint16_t x1 = 0;
+    uint16_t y1 = 0;
+    uint16_t x2 = 0;
+    uint16_t y2 = 0;
+    uint32_t drawTouch1 = 0; /* activate/deactivate draw of footprint of touch 1 */
+    uint32_t drawTouch2 = 0; /* activate/deactivate draw of footprint of touch 2 */
+    uint32_t colors[24] = {LCD_UTIL_COLOR_BLUE, LCD_UTIL_COLOR_GREEN, LCD_UTIL_COLOR_RED, LCD_UTIL_COLOR_CYAN, LCD_UTIL_COLOR_MAGENTA, LCD_UTIL_COLOR_YELLOW,
+    LCD_UTIL_COLOR_LIGHTBLUE, LCD_UTIL_COLOR_LIGHTGREEN, LCD_UTIL_COLOR_LIGHTRED, LCD_UTIL_COLOR_LIGHTCYAN, LCD_UTIL_COLOR_LIGHTMAGENTA,
+    LCD_UTIL_COLOR_LIGHTYELLOW, LCD_UTIL_COLOR_DARKBLUE, LCD_UTIL_COLOR_DARKGREEN, LCD_UTIL_COLOR_DARKRED, LCD_UTIL_COLOR_DARKCYAN,
+    LCD_UTIL_COLOR_DARKMAGENTA, LCD_UTIL_COLOR_DARKYELLOW, LCD_UTIL_COLOR_LIGHTGRAY, LCD_UTIL_COLOR_GRAY, LCD_UTIL_COLOR_DARKGRAY,
+    LCD_UTIL_COLOR_BLACK, LCD_UTIL_COLOR_BROWN, LCD_UTIL_COLOR_ORANGE };
+    uint32_t ts_status = BSP_ERROR_NONE;
+    uint8_t lcd_string[TOUCH_INFO_STRING_SIZE] = "";
+    uint32_t x_size, y_size;
 
-  BSP_LCD_GetXSize(&x_size);
-  BSP_LCD_GetYSize(&y_size);
+    BSP_LCD_GetXSize(&x_size);
+    BSP_LCD_GetYSize(&y_size);
 
-  /* Check in polling mode in touch screen the touch status and coordinates */
-  /* of touches if touch occurred                                           */
-  ts_status = BSP_TS_Get_MultiTouchState(&TS_MTState);
-  if(TS_MTState.TouchDetected)
-  {
-    /* One or dual touch have been detected  */
-
-    /* Erase previous information on touchscreen play pad area */
-    LCD_UTIL_FillRect(0, 80, x_size, y_size - 160, LCD_UTIL_COLOR_WHITE);
-
-    /* Re-Draw touch screen play area on LCD */
-    LCD_UTIL_DrawRect(10, 90, x_size - 20, y_size - 180, LCD_UTIL_COLOR_BLUE);
-    LCD_UTIL_DrawRect(11, 91, x_size - 22, y_size - 182, LCD_UTIL_COLOR_BLUE);
-
-    /* Erase previous information on bottom text bar */
-    LCD_UTIL_FillRect(0, y_size - 80, x_size, 80, LCD_UTIL_COLOR_BLUE);
-
-    /* Deactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
-    drawTouch1 = drawTouch2 = 0;
-
-    /* Get X and Y position of the first touch post calibrated */
-    x1 = TS_MTState.TouchX[0];
-    y1 = TS_MTState.TouchY[0];
-
-    if((y1 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
-       (y1 < (y_size - 90 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)))
+    /* Check in polling mode in touch screen the touch status and coordinates */
+    /* of touches if touch occurred                                           */
+    ts_status = BSP_TS_Get_MultiTouchState(&TS_MTState);
+    if(TS_MTState.TouchDetected)
     {
-      drawTouch1 = 1;
-    }
+        /* One or dual touch have been detected  */
 
-    /* If valid touch 1 position : inside the reserved area for the use case : draw the touch */
-    if(drawTouch1 == 1)
-    {
-      /* Draw circle of first touch : turn on colors[] table */
-      LCD_UTIL_FillCircle(x1, y1, TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS, colors[(touchscreen_color_idx++ % 24)]);
+        /* Erase previous information on touchscreen play pad area */
+        LCD_UTIL_FillRect(0, 80, x_size, y_size - 160, LCD_UTIL_COLOR_WHITE);
 
-    //   LCD_UTIL_SetTextColor(LCD_UTIL_COLOR_WHITE);
-    //   LCD_UTIL_SetFont(&Font16);
-      LCD_UTIL_DisplayString(0, y_size - 70, FONTSIZE_16, LCD_UTIL_COLOR_WHITE, (uint8_t *)"TOUCH INFO : ", CENTER_MODE);
+        /* Re-Draw touch screen play area on LCD */
+        LCD_UTIL_DrawRect(10, 90, x_size - 20, y_size - 180, LCD_UTIL_COLOR_BLUE);
+        LCD_UTIL_DrawRect(11, 91, x_size - 22, y_size - 182, LCD_UTIL_COLOR_BLUE);
 
-    //   LCD_UTIL_SetFont(&Font12);
-      sprintf((char*)lcd_string, "x1 = %u, y1 = %u, Event = %s, Weight = %lu",
-              x1,
-              y1,
-              ts_event_string_tab[TS_MTState.TouchEvent[0]],
-              TS_MTState.TouchWeight[0]);
-      LCD_UTIL_DisplayString(0, y_size - 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, lcd_string, CENTER_MODE);
-    } /* of if(drawTouch1 == 1) */
+        /* Erase previous information on bottom text bar */
+        LCD_UTIL_FillRect(0, y_size - 80, x_size, 80, LCD_UTIL_COLOR_BLUE);
 
-    if(TS_MTState.TouchDetected > 1)
-    {
-      /* Get X and Y position of the second touch post calibrated */
-      x2 = TS_MTState.TouchX[1];
-      y2 = TS_MTState.TouchY[1];
+        /* Deactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
+        drawTouch1 = drawTouch2 = 0;
 
-      if((y2 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
-         (y2 < (y_size - 90 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)))
-      {
-        drawTouch2 = 1;
-      }
+        /* Get X and Y position of the first touch post calibrated */
+        x1 = TS_MTState.TouchX[0];
+        y1 = TS_MTState.TouchY[0];
 
-      /* If valid touch 2 position : inside the reserved area for the use case : draw the touch */
-      if(drawTouch2 == 1)
-      {
-        sprintf((char*)lcd_string, "x2 = %u, y2 = %u, Event = %s, Weight = %lu",
-                x2,
-                y2,
-                ts_event_string_tab[TS_MTState.TouchEvent[1]],
-                TS_MTState.TouchWeight[1]);
-        LCD_UTIL_DisplayString(0, y_size - 35, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, lcd_string, CENTER_MODE);
+        if((y1 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
+        (y1 < (y_size - 90 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)))
+        {
+        drawTouch1 = 1;
+        }
 
-        /* Draw circle of second touch : turn on color[] table */
-        LCD_UTIL_FillCircle(x2, y2, TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS, colors[(touchscreen_color_idx++ % 24)]);
-      } /* of if(drawTouch2 == 1) */
+        /* If valid touch 1 position : inside the reserved area for the use case : draw the touch */
+        if(drawTouch1 == 1)
+        {
+        /* Draw circle of first touch : turn on colors[] table */
+        LCD_UTIL_FillCircle(x1, y1, TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS, colors[(touchscreen_color_idx++ % 24)]);
 
-    } /* of if(TS_MTState.TouchDetected > 1) */
+        //   LCD_UTIL_SetTextColor(LCD_UTIL_COLOR_WHITE);
+        //   LCD_UTIL_SetFont(&Font16);
+        LCD_UTIL_DisplayString(0, y_size - 70, FONTSIZE_16, LCD_UTIL_COLOR_WHITE, (uint8_t *)"TOUCH INFO : ", CENTER_MODE);
 
-    if((drawTouch1 == 1) || (drawTouch2 == 1))
-    {
-      /* Get updated gesture Id in global variable 'TS_State' */
-      ts_status = BSP_TS_GetGestureId(&GestureId);
+        //   LCD_UTIL_SetFont(&Font12);
+        sprintf((char*)lcd_string, "x1 = %u, y1 = %u, Event = %s, Weight = %lu",
+                x1,
+                y1,
+                ts_event_string_tab[TS_MTState.TouchEvent[0]],
+                TS_MTState.TouchWeight[0]);
+        LCD_UTIL_DisplayString(0, y_size - 45, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, lcd_string, CENTER_MODE);
+        } /* of if(drawTouch1 == 1) */
 
-      sprintf((char*)lcd_string, "Gesture Id = %s", ts_gesture_id_string_tab[GestureId]);
-    }
-    else
-    {
-      /* Invalid touch position */
-    //   LCD_UTIL_SetTextColor(LCD_UTIL_COLOR_WHITE);
-      LCD_UTIL_DisplayString(0, y_size - 70, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Invalid touch position : use drawn touch area : ", CENTER_MODE);
-    }
-  } /* of if(TS_MTState.TouchDetected) */
+        if(TS_MTState.TouchDetected > 1)
+        {
+        /* Get X and Y position of the second touch post calibrated */
+        x2 = TS_MTState.TouchX[1];
+        y2 = TS_MTState.TouchY[1];
 
-  return(ts_status);
+        if((y2 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
+            (y2 < (y_size - 90 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)))
+        {
+            drawTouch2 = 1;
+        }
+
+        /* If valid touch 2 position : inside the reserved area for the use case : draw the touch */
+        if(drawTouch2 == 1)
+        {
+            sprintf((char*)lcd_string, "x2 = %u, y2 = %u, Event = %s, Weight = %lu",
+                    x2,
+                    y2,
+                    ts_event_string_tab[TS_MTState.TouchEvent[1]],
+                    TS_MTState.TouchWeight[1]);
+            LCD_UTIL_DisplayString(0, y_size - 35, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, lcd_string, CENTER_MODE);
+
+            /* Draw circle of second touch : turn on color[] table */
+            LCD_UTIL_FillCircle(x2, y2, TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS, colors[(touchscreen_color_idx++ % 24)]);
+        } /* of if(drawTouch2 == 1) */
+
+        } /* of if(TS_MTState.TouchDetected > 1) */
+
+        if((drawTouch1 == 1) || (drawTouch2 == 1))
+        {
+        /* Get updated gesture Id in global variable 'TS_State' */
+        ts_status = BSP_TS_GetGestureId(&GestureId);
+
+        sprintf((char*)lcd_string, "Gesture Id = %s", ts_gesture_id_string_tab[GestureId]);
+        }
+        else
+        {
+        /* Invalid touch position */
+        //   LCD_UTIL_SetTextColor(LCD_UTIL_COLOR_WHITE);
+        LCD_UTIL_DisplayString(0, y_size - 70, FONTSIZE_12, LCD_UTIL_COLOR_WHITE, (uint8_t *)"Invalid touch position : use drawn touch area : ", CENTER_MODE);
+        }
+    } /* of if(TS_MTState.TouchDetected) */
+
+    return(ts_status);
 }
 
 #endif /* USE_TS_MULTI_TOUCH == 1 */

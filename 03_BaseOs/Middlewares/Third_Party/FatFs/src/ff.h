@@ -285,7 +285,7 @@ TCHAR* f_gets (TCHAR* buff, int len, FIL* fp);						/* Get a string from the fil
 #define EOF (-1)
 #endif
 
-
+FRESULT dir_sdi (DIR *p,DWORD ofs);					//此处为自行添加的,用于方便查找上一个文件.
 
 
 /*--------------------------------------------------------------*/

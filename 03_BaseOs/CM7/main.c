@@ -172,7 +172,7 @@ void AppTaskGUI(void *argument)
 
     while (1)
     {
-        appGUI_MainProc();
+        // appGUI_MainProc();
         osDelay(5);
     }
 }
@@ -233,13 +233,16 @@ void AppTaskUserIF(void *argument)
                     printf("K3 DOWM\r\n");
                     break;
                 case KEY_4_DOWN: /*JOY L*/
+                    osEventFlagsSet(gEventId_sdapp, APPSD_EVT_SHOW_PREV_PIC);
                     printf("K4 DOWM\r\n");
                     break;
                 case KEY_5_DOWN: /*JOY R*/
+                    osEventFlagsSet(gEventId_sdapp, APPSD_EVT_SHOW_NEXT_PIC);
                     printf("K5 DOWM\r\n");
                     break;
                 case KEY_6_DOWN: /*JOY OK*/
-                    printf("sdram test passed\r\n");
+                    osEventFlagsSet(gEventId_sdapp, APPSD_EVT_SHOW_FRT_PIC);
+                    printf("OK DOWM\r\n");
                     break;
                 /* 其他的键值不处理 */
                 default:

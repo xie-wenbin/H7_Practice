@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H747xx, USE_STM32H747I_DISCO,CORE_CM7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Components\mt25tl01g;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\Middlewares\Third_Party\FatFs\src;..\..\Middlewares\Third_Party\FatFs\src\drivers;..\..\CM7\application_test</IncludePath>
+              <IncludePath>..\..\Common\Inc;..\..\CM7;..\..\CM7\bsp;..\..\CM7\malloc;..\..\CM7\app;..\..\Drivers\CMSIS\Include;..\..\Drivers\CMSIS\Device\ST\STM32H7xx\Include;..\..\Drivers\STM32H7xx_HAL_Driver\Inc;..\..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy;..\..\Drivers\BSP\Components\ft6x06;..\..\Drivers\BSP\Components\is42s32800j;..\..\Drivers\BSP\Components\otm8009a;..\..\Drivers\BSP\Components\mt25tl01g;..\..\Drivers\BSP\Fonts;..\..\Middlewares\Third_Party\FreeRTOS\include;..\..\Middlewares\Third_Party\FreeRTOS\CMSIS_RTOS_V2;..\..\Middlewares\Third_Party\FreeRTOS\portable\RVDS\ARM_CM4F;..\..\Middlewares\Third_Party\FatFs\src;..\..\Middlewares\Third_Party\FatFs\src\drivers;..\..\CM7\application_test;..\..\CM7\app\pictures</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -558,6 +558,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appSd.c</FilePath>
             </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>FATFS_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\FATFS_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>Pic_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\pictures\Pic_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>tjpgd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\pictures\tjpgd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -709,6 +729,16 @@
               <FileName>bsp_sdio_sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\malloc\bsp_memory.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtx_memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\malloc\rtx_memory.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1654,6 +1684,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\CM7\app\appSd.c</FilePath>
             </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>FATFS_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\FATFS_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>Pic_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\pictures\Pic_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>tjpgd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\app\pictures\tjpgd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1736,6 +1786,16 @@
               <FileName>bsp_sdio_sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\CM7\bsp\bsp_sdio_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\malloc\bsp_memory.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtx_memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\CM7\malloc\rtx_memory.c</FilePath>
             </File>
           </Files>
         </Group>

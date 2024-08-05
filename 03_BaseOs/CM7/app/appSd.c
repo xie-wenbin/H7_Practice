@@ -5,6 +5,8 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio_dma.h"
 #include "appSd.h"
+#include "FATFS_drv.h"
+#include "Pic_drv.h"
 
 /* Private define ------------------------------------------------------------*/
 /* 用于测试读写速度 */
@@ -87,6 +89,15 @@ static void appSd_CreateDir(void);
 static void appSd_DeleteAll(void);
 static void appSd_SpeedTest(void);
 
+
+
+uint16_t gulTotalPicNum = 0;    //目录下图片数量
+uint16_t gusCurPicIdx = 0;		//图片当前索引
+uint32_t *picoffsettbl;	//图片文件offset索引表 
+
+void appSd_initPicShow(void);
+void appSd_showPicture(void);
+
 /**
   * @brief  task to deal with sd detect event for sd mount
   * @param  None
@@ -155,6 +166,10 @@ void AppTaskSdMainProc(void *argument)
         printf("挂载文件系统失败 (%s)\r\n", FR_Table[result]);
     }
 
+    Pic_DrvInit();
+
+    appSd_initPicShow();
+
     osEventFlagsSet(gEventId_sdapp, APPSD_EVT_INITDONE);
 
     while (1)
@@ -163,6 +178,8 @@ void AppTaskSdMainProc(void *argument)
 
         // for test
         wait_flags |= APPSD_EVT_NEWFILE | APPSD_EVT_READFILE | APPSD_EVT_NEWDIR | APPSD_EVT_DELETEALL | APPSD_EVT_SPEED_TEST;
+
+        wait_flags |= APPSD_EVT_SHOW_FRT_PIC | APPSD_EVT_SHOW_NEXT_PIC | APPSD_EVT_SHOW_PREV_PIC;
 
         retFlags = osEventFlagsWait(gEventId_sdapp, \
                                     wait_flags,     \
@@ -174,6 +191,8 @@ void AppTaskSdMainProc(void *argument)
         if ((retFlags & APPSD_EVT_INITDONE) == APPSD_EVT_INITDONE)
         {
             appSd_showSdCardInfo();
+
+            appSd_initPicShow();
         }
 
         if ((retFlags & APPSD_EVT_SHOW_ROOTDIR) == APPSD_EVT_SHOW_ROOTDIR)
@@ -204,6 +223,31 @@ void AppTaskSdMainProc(void *argument)
         if ((retFlags & APPSD_EVT_DELETEALL) == APPSD_EVT_DELETEALL)
         {
             appSd_DeleteAll();
+        }
+
+        if ((retFlags & APPSD_EVT_SHOW_FRT_PIC) == APPSD_EVT_SHOW_FRT_PIC)
+        {
+            gusCurPicIdx = 0;
+            appSd_showPicture();
+        }
+
+        if ((retFlags & APPSD_EVT_SHOW_NEXT_PIC) == APPSD_EVT_SHOW_NEXT_PIC)
+        {
+            gusCurPicIdx++;
+            appSd_showPicture();
+        }
+
+        if ((retFlags & APPSD_EVT_SHOW_PREV_PIC) == APPSD_EVT_SHOW_PREV_PIC)
+        {
+            if (gusCurPicIdx == 0)
+            {
+                gusCurPicIdx = gulTotalPicNum - 1;
+            }
+            else
+            {
+                gusCurPicIdx--;
+            }
+            appSd_showPicture();
         }
 
         osDelay(20);
@@ -273,6 +317,8 @@ static void appSd_showSdCardInfo(void)
     FRESULT result;
     DWORD fre_clust, free_size, total_size;
     FATFS *pfs = &fs;
+    uint32_t folderSize = 0;
+
 
     float total_sizeGB = 0.0;
     float free_sizeGB = 0.0;
@@ -292,8 +338,28 @@ static void appSd_showSdCardInfo(void)
     }
     else
     {
-        printf("挂载文件系统失败 (%s)\r\n", FR_Table[result]);
+        // printf("挂载文件系统失败 (%s)\r\n", FR_Table[result]);
+        FATFS_ErrorReport("f_getfree", result);
     }
+
+    folderSize = FATFS_getFolderSize((uint8_t *)DiskPath);
+
+    printf("root folder size: %d\r\n", folderSize);
+#if 0
+    FileDirScan_T pDirScan;
+
+    pDirScan.file_name = (char**)AllocMemD1(FATFS_DIR_MAX_NUM * sizeof(char*));
+
+    FATFS_scanDirectoryList(DiskPath, "txt", &pDirScan);
+    printf("scan dir[%s] \".txt\" %d files:\r\n", DiskPath, pDirScan.file_num);
+    for (uint8_t iloop = 0; iloop < pDirScan.file_num; iloop++)
+    {
+        printf("/ %s \r\n", pDirScan.file_name[iloop]);
+    }
+
+    FreeMemD1(pDirScan.file_name);
+#endif
+
 #if 0
     /* 打印卡速度信息 */
     if(hsd_sdmmc.SdCard.CardSpeed == CARD_NORMAL_SPEED)
@@ -711,4 +777,112 @@ static void appSd_SpeedTest(void)
 }
 
 
+void appSd_initPicShow(void)
+{
+    uint8_t res;
+
+    DIR picdir;	 		//图片目录
+    FILINFO *picfileinfo;//文件信息 
+    uint8_t *pname;      //带路径的文件名
+    uint16_t temp;
+
+    gulTotalPicNum = FATFS_getPictureNum("0:/PICTURE");
+
+    if (gulTotalPicNum > 0)
+    {
+        picfileinfo = AllocMemD1(sizeof(FILINFO));
+        pname = AllocMemD1(_MAX_LFN * 2 + 1);     // 为带路径的文件名分配内存
+        picoffsettbl = AllocMemD1(4 * gulTotalPicNum); // 申请4*totpicnum个字节的内存,用于存放图片索引
+
+        if (!picfileinfo||!pname||!picoffsettbl)
+        {
+            printf("内存分配失败 \r\n");
+            return ;
+        }
+
+        // 记录索引
+        res = f_opendir(&picdir, "0:/PICTURE"); // 打开目录
+        if (res == FR_OK)
+        {
+            gusCurPicIdx = 0; // 当前索引为0
+            while (1)     // 全部查询一遍
+            {
+                temp = picdir.dptr;                    // 记录当前dptr偏移
+                res = f_readdir(&picdir, picfileinfo); // 读取目录下的一个文件
+                if (res != FR_OK || picfileinfo->fname[0] == 0)
+                    break; // 错误了/到末尾了,退出
+                res = FATFS_getFileType((uint8_t *)picfileinfo->fname);
+                if ((res & 0xF0) == 0x50) // 取高四位,看看是不是图片文件
+                {
+                    picoffsettbl[gusCurPicIdx] = temp; // 记录索引
+                    gusCurPicIdx++;
+                }
+            }
+
+            res = f_closedir(&picdir);
+        }
+
+        FreeMemD1(picfileinfo);
+        FreeMemD1(pname);
+    }
+
+    Pic_DrvInit();
+}
+
+void appSd_showPicture(void)
+{
+    uint8_t res;
+
+    DIR picdir;	 		//图片目录
+    FILINFO *picfileinfo;//文件信息 
+    uint8_t *pname;      //带路径的文件名
+
+    if (gulTotalPicNum > 0)
+    {
+        picfileinfo = AllocMemD1(sizeof(FILINFO));
+        pname = AllocMemD1(_MAX_LFN * 2 + 1);       // 为带路径的文件名分配内存
+
+        if (!picfileinfo || !pname || !picoffsettbl)
+        {
+            printf("内存分配失败 \r\n");
+            return;
+        }
+
+        res = f_opendir(&picdir, (const TCHAR *)"0:/PICTURE"); // 打开目录
+
+        if (gusCurPicIdx >= gulTotalPicNum)
+        {
+            gusCurPicIdx = 0;
+        }
+
+        if (res == FR_OK) // 打开成功
+        {
+            dir_sdi(&picdir, picoffsettbl[gusCurPicIdx]); // 改变当前目录索引
+
+            res = f_readdir(&picdir, picfileinfo); // 读取目录下的一个文件
+
+            if (res != FR_OK || picfileinfo->fname[0] == 0)
+            {
+                printf("未找到图片 \r\n");
+                FATFS_ErrorReport("f_readdir", (FRESULT)res);
+                return; // 错误了/到末尾了,退出
+            }
+            strcpy((char *)pname, "0:/PICTURE/");                    // 复制路径(目录)
+            strcat((char *)pname, (const char *)picfileinfo->fname); // 将文件名接在后面
+            LCD_UTIL_Clear(LCD_UTIL_COLOR_LIGHTGRAY);
+            LCD_UTIL_SetBackColor(0xFFFFFFFFUL);
+            Pic_loadPictureFile(pname, 0, 0, 800, 480, 1);                                                // 显示图片
+            LCD_UTIL_DisplayString(2, 2, FONTSIZE_16, LCD_UTIL_COLOR_BLUE, (uint8_t*)picfileinfo->fname, LEFT_MODE); // 显示图片名字
+        }
+
+        res = f_closedir(&picdir);
+
+        FreeMemD1(picfileinfo);
+        FreeMemD1(pname);
+    }
+    else
+    {
+        LCD_UTIL_DisplayString(2, 2, FONTSIZE_16, LCD_UTIL_COLOR_RED, "not find any pictures", LEFT_MODE);
+    }
+}
 
